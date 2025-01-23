@@ -1,7 +1,11 @@
 todo buy book
 deadline read book /by some time
+event
+event meeting /from
+event meeting /from now /to
 event meeting /from now /to future
 mark 1
+lest
 list
 mark 3
 todo shopping
