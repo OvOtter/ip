@@ -49,7 +49,7 @@ public class Bun {
             "(づ｡◕‿‿◕｡)づ"       // Hug
     };
 
-    private final ArrayList<String> toDoList;
+    private final ArrayList<Task> toDoList;
 
     public Bun() {
         this.toDoList = new ArrayList<>();
@@ -74,14 +74,25 @@ public class Bun {
                 System.out.println("    Bye. Hope to see you again soon!");
                 break;
             } else if (s.equals("list")) {
+                System.out.println("    (ง'̀-'́)ง Here are the tasks in your list:");
                 for (int i = 0; i < bun.toDoList.size(); i++) {
                     System.out.println("    " + (i + 1) + ". " + bun.toDoList.get(i));
                 }
-            } else {
+            } else if (s.startsWith("mark ")) {
+                int index = Integer.parseInt(s.split("\\s+")[1]) - 1;
+                Task curTask = bun.toDoList.get(index);
+                curTask.markAsDone();
+                System.out.println("    Nice (*>ω<) I've marked this task as done:\n      " + curTask);
+            } else if (s.startsWith("unmark ")) {
+                int index = Integer.parseInt(s.split("\\s+")[1]) - 1;
+                Task curTask = bun.toDoList.get(index);
+                curTask.markAsNotDone();
+                System.out.println("    OK (`･ω･´) I've marked this task as not done yet:\n      " + curTask);
+            } else{
                 //randomly add one kaomoji at the end of the echo!
                 String randomKaomoji = kaomoji[new Random().nextInt(kaomoji.length)];
                 s += " " + randomKaomoji;
-                bun.toDoList.add(s);
+                bun.toDoList.add(new Task(s));
                 System.out.println("    added: " + s);
             }
         }
