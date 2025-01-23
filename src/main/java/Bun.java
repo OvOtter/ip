@@ -2,6 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Bun {
+    public enum Command {
+        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT
+    }
+
     private final static String name = "Bun";
     private final static String logo = """
                     .-. .-')                    .-') _ \s
@@ -41,14 +45,20 @@ public class Bun {
         label:
         while (true) {
             String instruction = scanner.next();
-            try {
 
-                switch (instruction) {
-                    case "bye": {
+            try {
+                Command command;
+                try {
+                    command = Command.valueOf(instruction.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    throw new InvalidCommandException(instruction);
+                }
+                switch (command) {
+                    case BYE: {
                         System.out.println("    Bye. Hope to see you again soon!");
                         break label;
                     }
-                    case "list": {
+                    case LIST: {
                         System.out.println("    Here are the tasks in your list:");
                         for (int i = 0; i < bun.taskList.size(); i++) {
                             System.out.println("    " + (i + 1) + ". " + bun.taskList.get(i));
@@ -56,40 +66,45 @@ public class Bun {
                         scanner.nextLine();
                         break;
                     }
-                    case "mark": {
+                    case MARK: {
+                        Task curTask;
                         int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                        if (index >= bun.taskList.size()) {
+                        try {
+                            curTask = bun.taskList.get(index);
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             throw new InvalidIndexException(index + 1, bun.taskList.size());
                         }
-                        Task curTask = bun.taskList.get(index);
                         curTask.markAsDone();
                         System.out.println("    Nice :D I've marked this task as done:\n      " + curTask);
                         break;
                     }
-                    case "unmark": {
+                    case UNMARK: {
+                        Task curTask;
                         int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                        if (index >= bun.taskList.size()) {
+                        try {
+                            curTask = bun.taskList.get(index);
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             throw new InvalidIndexException(index + 1, bun.taskList.size());
                         }
-                        Task curTask = bun.taskList.get(index);
                         curTask.markAsNotDone();
                         System.out.println("    OK D: I've marked this task as not done yet:\n      " + curTask);
                         break;
                     }
-                    case "remove": {
+                    case REMOVE: {
+                        Task taskToDelete;
                         int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                        if (index >= bun.taskList.size()) {
+                        try {
+                            taskToDelete = bun.taskList.get(index);
+                        } catch (ArrayIndexOutOfBoundsException e) {
                             throw new InvalidIndexException(index + 1, bun.taskList.size());
                         }
-                        System.out.println(index);
-                        Task taskToDelete = bun.taskList.get(index);
                         bun.taskList.remove(index);
                         System.out.println("     Noted. I've removed this task:\n" +
                                 "       " + taskToDelete + "\n" +
                                 "     Now you have" + bun.taskList.size() + "task(s) in the list.");
                         break;
                     }
-                    case "todo": {
+                    case TODO: {
                         String description = scanner.nextLine().trim();
                         if (description.isEmpty()) {
                             throw new MissingFieldException("description");
@@ -99,23 +114,20 @@ public class Bun {
                         printAddTaskMessage(toDo, bun.taskList.size());
                         break;
                     }
-                    case "deadline": {
+                    case DEADLINE: {
                         String[] content = scanner.nextLine().trim().split(" /by ");
                         Deadline deadline = getDeadLine(content);
                         bun.taskList.add(deadline);
                         printAddTaskMessage(deadline, bun.taskList.size());
                         break;
                     }
-                    case "event": {
+                    case EVENT: {
                         String[] content = scanner.nextLine().trim().split(" /from | /to ");
                         //TODO: ensure that /from comes before /to
                         Event event = getEvent(content);
                         bun.taskList.add(event);
                         printAddTaskMessage(event, bun.taskList.size());
                         break;
-                    }
-                    default: {
-                        throw new InvalidCommandException(instruction);
                     }
                 }
             } catch (BunException e) {
