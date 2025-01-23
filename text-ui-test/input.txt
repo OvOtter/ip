@@ -1,0 +1,10 @@
+todo buy book
+deadline read book /by some time
+event meeting /from now /to future
+mark 1
+list
+mark 3
+todo shopping
+unmark 3
+list
+bye
