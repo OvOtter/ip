@@ -30,7 +30,7 @@ public class Bun {
     private static void printAddTaskMessage(Task task, int taskCount) {
         System.out.println("    Got it. I've added this task:\n" +
                 "      " + task + "\n" +
-                "    Now you have " + taskCount + " tasks in the list.");
+                "    Now you have " + taskCount + " task(s) in the list.");
     }
 
     public static void main(String[] args) {
@@ -58,6 +58,9 @@ public class Bun {
                     }
                     case "mark": {
                         int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                        if (index >= bun.taskList.size()) {
+                            throw new InvalidIndexException(index + 1, bun.taskList.size());
+                        }
                         Task curTask = bun.taskList.get(index);
                         curTask.markAsDone();
                         System.out.println("    Nice :D I've marked this task as done:\n      " + curTask);
@@ -65,9 +68,25 @@ public class Bun {
                     }
                     case "unmark": {
                         int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                        if (index >= bun.taskList.size()) {
+                            throw new InvalidIndexException(index + 1, bun.taskList.size());
+                        }
                         Task curTask = bun.taskList.get(index);
                         curTask.markAsNotDone();
                         System.out.println("    OK D: I've marked this task as not done yet:\n      " + curTask);
+                        break;
+                    }
+                    case "remove": {
+                        int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                        if (index >= bun.taskList.size()) {
+                            throw new InvalidIndexException(index + 1, bun.taskList.size());
+                        }
+                        System.out.println(index);
+                        Task taskToDelete = bun.taskList.get(index);
+                        bun.taskList.remove(index);
+                        System.out.println("     Noted. I've removed this task:\n" +
+                                "       " + taskToDelete + "\n" +
+                                "     Now you have" + bun.taskList.size() + "task(s) in the list.");
                         break;
                     }
                     case "todo": {
@@ -113,11 +132,6 @@ public class Bun {
         }
         String description = content[0].trim();
         String date = content[1].trim();
-        if (description.isEmpty()) {
-            throw new MissingFieldException("description");
-        } else if (date.isEmpty()) {
-            throw new MissingFieldException("due date");
-        }
 
         return new Deadline(description, date);
     }
@@ -133,13 +147,6 @@ public class Bun {
         String description = content[0].trim();
         String start = content[1].trim();
         String end = content[2].trim();
-        if (description.isEmpty()) {
-            throw new MissingFieldException("description");
-        } else if (start.isEmpty()) {
-            throw new MissingFieldException("start date");
-        } else if (end.isEmpty()) {
-            throw new MissingFieldException("end date");
-        }
 
         return new Event(description, start, end);
     }
