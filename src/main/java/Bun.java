@@ -28,9 +28,9 @@ public class Bun {
     }
 
     private static void printAddTaskMessage(Task task, int taskCount) {
-        System.out.println("     Got it. I've added this task:\n" +
-                "       " + task + "\n" +
-                "     Now you have " + taskCount + " tasks in the list.");
+        System.out.println("    Got it. I've added this task:\n" +
+                "      " + task + "\n" +
+                "    Now you have " + taskCount + " tasks in the list.");
     }
 
     public static void main(String[] args) {
@@ -43,28 +43,30 @@ public class Bun {
         while (true) {
             String instruction = scanner.next();
             switch (instruction) {
-                case "bye":
+                case "bye": {
                     System.out.println("    Bye. Hope to see you again soon!");
                     break label;
-                case "list":
-                    System.out.println("    (ง'̀-'́)ง Here are the tasks in your list:");
+                }
+                case "list": {
+                    System.out.println("    Here are the tasks in your list:");
                     for (int i = 0; i < bun.taskList.size(); i++) {
                         System.out.println("    " + (i + 1) + ". " + bun.taskList.get(i));
                     }
                     scanner.nextLine();
                     break;
+                }
                 case "mark": {
                     int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
                     Task curTask = bun.taskList.get(index);
                     curTask.markAsDone();
-                    System.out.println("    Nice (*>ω<) I've marked this task as done:\n      " + curTask);
+                    System.out.println("    Nice :D I've marked this task as done:\n      " + curTask);
                     break;
                 }
                 case "unmark": {
                     int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
                     Task curTask = bun.taskList.get(index);
                     curTask.markAsNotDone();
-                    System.out.println("    OK (`･ω･´) I've marked this task as not done yet:\n      " + curTask);
+                    System.out.println("    OK D: I've marked this task as not done yet:\n      " + curTask);
                     break;
                 }
                 case "todo": {
