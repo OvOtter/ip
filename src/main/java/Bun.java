@@ -130,11 +130,14 @@ public class Bun {
                         break;
                     }
                 }
+                FileManager.saveTask(bun.taskList);
             } catch (BunException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
+
+
 
     private static Deadline getDeadLine(String[] content) throws MissingFieldException {
         if (content.length == 0 || content[0].trim().isEmpty()) {
