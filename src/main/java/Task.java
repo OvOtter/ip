@@ -10,20 +10,24 @@ public class Task {
 
     public static Task stringToTask(String storedTask) {
         String[] content = storedTask.split("\\s\\|\\s");
+        if (content.length == 0) {
+            return null;
+        }
+
         Task taskToReturn = null;
         try {
-            switch (storedTask.charAt(0)) {
-            case 'T':
+            if (storedTask.charAt(0) == 'T') {
                 taskToReturn = new ToDo(content[2]);
                 if (content[1].equals("1")) {
                     taskToReturn.markAsDone();
                 }
-            case 'D':
+            } else if (storedTask.charAt(0) == 'D') {
                 taskToReturn = new Deadline(content[2], content[3]);
                 if (content[1].equals("1")) {
                     taskToReturn.markAsDone();
                 }
-            case 'E':
+            } else {
+                assert(storedTask.charAt(0) == 'E');
                 taskToReturn = new Event(content[2], content[3], content[4]);
                 if (content[1].equals("1")) {
                     taskToReturn.markAsDone();

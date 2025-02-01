@@ -6,22 +6,22 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileManager {
-    public static void saveTask(ArrayList<Task> tasks) {
-        StringBuilder content = new StringBuilder();
-        for (Task task : tasks) {
-            content.append(task.getStoredString()).append("\n");
-        }
+public class Storage {
+    private final String filePath;
 
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void save(TaskList tasks) {
         Path dataDir = Path.of("data");
-
-        Path bunFile = dataDir.resolve("bun.txt");
+        String content = tasks.toStoredContent();
 
         try {
             Files.createDirectories(dataDir);
 
             Files.writeString(
-                    bunFile,
+                    Path.of(this.filePath),
                     content + System.lineSeparator(),
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING
@@ -31,23 +31,27 @@ public class FileManager {
             System.err.println("Failed to write to duke.txt: " + e.getMessage());
         }
     }
-    public static void loadTask(ArrayList<Task> tasks) {
-        Path filePath = Path.of("data/bun.txt");
+
+    public ArrayList<Task> load() throws BunException {
+        Path filePath = Path.of(this.filePath);
+        ArrayList<Task> returnedTasks = new ArrayList<>();
         try {
             // Return empty array if file does not exist
             if (!Files.exists(filePath)) {
-                return;
+                System.out.println("File does not exist: " + filePath);
+                return returnedTasks;
             }
 
             List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
             for (String line : lines) {
                 Task task = Task.stringToTask(line);
                 if (task != null) {
-                    tasks.add(task);
+                    returnedTasks.add(task);
                 }
             }
+            return returnedTasks;
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            throw new BunException("Error reading the stored task list.");
         }
     }
 }
