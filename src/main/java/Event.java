@@ -1,11 +1,18 @@
-public class Event extends Task{
-    protected String start;
-    protected String end;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public Event(String description, String start, String end){
+public class Event extends Task{
+    protected LocalDate start;
+    protected LocalDate end;
+
+    public Event(String description, String start, String end) throws DateFormatException {
         super(description);
-        this.start = start;
-        this.end = end;
+        try {
+            this.start = LocalDate.parse(start);
+            this.end = LocalDate.parse(end);
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
+        }
     }
 
     @Override

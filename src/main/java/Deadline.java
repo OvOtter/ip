@@ -1,14 +1,21 @@
-public class Deadline extends Task{
-    protected String date;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    public Deadline(String description, String date){
+public class Deadline extends Task{
+    protected LocalDate date;
+
+    public Deadline(String description, String date) throws DateFormatException {
         super(description);
-        this.date = date;
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
+        }
     }
 
     @Override
     public String toString() {
-      return String.format("[D]%s (by: %s)", super.toString(), date);
+      return String.format("[D]%s (by: %s)", super.toString(), this.date);
     }
 
     public String getStoredString(){

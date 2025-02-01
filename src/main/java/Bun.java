@@ -60,6 +60,10 @@ public class Bun {
                     break label;
                 }
                 case LIST: {
+                    if (bun.taskList.isEmpty()) {
+                        System.out.println("    There are no tasks in your list.");
+                        break;
+                    }
                     System.out.println("    Here are the tasks in your list:");
                     for (int i = 0; i < bun.taskList.size(); i++) {
                         System.out.println("    " + (i + 1) + ". " + bun.taskList.get(i));
@@ -140,7 +144,7 @@ public class Bun {
 
 
 
-    private static Deadline getDeadLine(String[] content) throws MissingFieldException {
+    private static Deadline getDeadLine(String[] content) throws MissingFieldException, DateFormatException {
         if (content.length == 0 || content[0].trim().isEmpty()) {
             throw new MissingFieldException("description");
         } else if (content.length == 1) {
@@ -152,7 +156,7 @@ public class Bun {
         return new Deadline(description, date);
     }
 
-    private static Event getEvent(String[] content) throws MissingFieldException {
+    private static Event getEvent(String[] content) throws MissingFieldException, DateFormatException {
         if (content.length == 0 || content[0].trim().isEmpty()) {
             throw new MissingFieldException("description");
         } else if (content.length == 1 || content[1].trim().isEmpty()) {
