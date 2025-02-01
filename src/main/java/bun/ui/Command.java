@@ -1,3 +1,5 @@
+package bun.ui;
+
 public abstract class Command {
     private final boolean isExit;
 

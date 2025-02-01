@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class MissingFieldException extends BunException {
     protected String varNAme;
 

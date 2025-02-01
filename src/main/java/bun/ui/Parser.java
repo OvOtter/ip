@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class Parser {
     public enum CommandWord {
         BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT

@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class ExitCommand extends Command {
     public ExitCommand() {
         super(true);

@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class DeleteCommand extends Command {
     private final int index;
 

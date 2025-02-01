@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class DateFormatException extends BunException {
 
     public DateFormatException() {

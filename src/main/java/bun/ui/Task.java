@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class Task {
 
     protected String description;

@@ -1,3 +1,5 @@
+package bun.ui;
+
 public class AddCommand extends Command {
     private final Task task;
 

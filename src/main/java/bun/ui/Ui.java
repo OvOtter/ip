@@ -1,3 +1,5 @@
+package bun.ui;
+
 import java.util.Scanner;
 
 public class Ui {
