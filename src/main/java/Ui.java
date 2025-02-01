@@ -47,7 +47,7 @@ public class Ui {
     public void printDeleteTaskMessage(Task task, int taskCount) {
         System.out.println("     Noted. I've removed this task:\n" +
                 "       " + task + "\n" +
-                "     Now you have" + taskCount + "task(s) in the list.");
+                "     Now you have " + taskCount + " task(s) in the list.");
     }
 
     public void printMarkTaskMessage(Task task) {
@@ -57,7 +57,7 @@ public class Ui {
     public void printUnmarkTaskMessage(Task task, int taskCount) {
         System.out.println("     Noted. I've removed this task:\n" +
                 "       " + task + "\n" +
-                "     Now you have" + taskCount + "task(s) in the list.");
+                "     Now you have " + taskCount + " task(s) in the list.");
     }
 
     public void showError(String error) {

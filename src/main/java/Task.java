@@ -9,10 +9,10 @@ public class Task {
     }
 
     public static Task stringToTask(String storedTask) {
-        String[] content = storedTask.split("\\s\\|\\s");
-        if (content.length == 0) {
+        if (storedTask == null || storedTask.isEmpty()) {
             return null;
         }
+        String[] content = storedTask.split("\\s\\|\\s");
 
         Task taskToReturn = null;
         try {
