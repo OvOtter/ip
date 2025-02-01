@@ -23,6 +23,7 @@ public class Bun {
 
     public Bun() {
         this.taskList = new ArrayList<>();
+        FileManager.loadTask(this.taskList);
     }
 
     private static void intro() {
@@ -54,81 +55,81 @@ public class Bun {
                     throw new InvalidCommandException(instruction);
                 }
                 switch (command) {
-                    case BYE: {
-                        System.out.println("    Bye. Hope to see you again soon!");
-                        break label;
+                case BYE: {
+                    System.out.println("    Bye. Hope to see you again soon!");
+                    break label;
+                }
+                case LIST: {
+                    System.out.println("    Here are the tasks in your list:");
+                    for (int i = 0; i < bun.taskList.size(); i++) {
+                        System.out.println("    " + (i + 1) + ". " + bun.taskList.get(i));
                     }
-                    case LIST: {
-                        System.out.println("    Here are the tasks in your list:");
-                        for (int i = 0; i < bun.taskList.size(); i++) {
-                            System.out.println("    " + (i + 1) + ". " + bun.taskList.get(i));
-                        }
-                        scanner.nextLine();
-                        break;
+                    scanner.nextLine();
+                    break;
+                }
+                case MARK: {
+                    Task curTask;
+                    int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                    try {
+                        curTask = bun.taskList.get(index);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new InvalidIndexException(index + 1, bun.taskList.size());
                     }
-                    case MARK: {
-                        Task curTask;
-                        int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                        try {
-                            curTask = bun.taskList.get(index);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new InvalidIndexException(index + 1, bun.taskList.size());
-                        }
-                        curTask.markAsDone();
-                        System.out.println("    Nice :D I've marked this task as done:\n      " + curTask);
-                        break;
+                    curTask.markAsDone();
+                    System.out.println("    Nice :D I've marked this task as done:\n      " + curTask);
+                    break;
+                }
+                case UNMARK: {
+                    Task curTask;
+                    int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                    try {
+                        curTask = bun.taskList.get(index);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new InvalidIndexException(index + 1, bun.taskList.size());
                     }
-                    case UNMARK: {
-                        Task curTask;
-                        int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                        try {
-                            curTask = bun.taskList.get(index);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new InvalidIndexException(index + 1, bun.taskList.size());
-                        }
-                        curTask.markAsNotDone();
-                        System.out.println("    OK D: I've marked this task as not done yet:\n      " + curTask);
-                        break;
+                    curTask.markAsNotDone();
+                    System.out.println("    OK D: I've marked this task as not done yet:\n      " + curTask);
+                    break;
+                }
+                case REMOVE: {
+                    Task taskToDelete;
+                    int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
+                    try {
+                        taskToDelete = bun.taskList.get(index);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new InvalidIndexException(index + 1, bun.taskList.size());
                     }
-                    case REMOVE: {
-                        Task taskToDelete;
-                        int index = Integer.parseInt(scanner.nextLine().trim()) - 1;
-                        try {
-                            taskToDelete = bun.taskList.get(index);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new InvalidIndexException(index + 1, bun.taskList.size());
-                        }
-                        bun.taskList.remove(index);
-                        System.out.println("     Noted. I've removed this task:\n" +
-                                "       " + taskToDelete + "\n" +
-                                "     Now you have" + bun.taskList.size() + "task(s) in the list.");
-                        break;
+                    bun.taskList.remove(index);
+                    System.out.println("     Noted. I've removed this task:\n" +
+                            "       " + taskToDelete + "\n" +
+                            "     Now you have" + bun.taskList.size() + "task(s) in the list.");
+                    break;
+                }
+                case TODO: {
+                    String description = scanner.nextLine().trim();
+                    if (description.isEmpty()) {
+                        throw new MissingFieldException("description");
                     }
-                    case TODO: {
-                        String description = scanner.nextLine().trim();
-                        if (description.isEmpty()) {
-                            throw new MissingFieldException("description");
-                        }
-                        ToDo toDo = new ToDo(description);
-                        bun.taskList.add(toDo);
-                        printAddTaskMessage(toDo, bun.taskList.size());
-                        break;
-                    }
-                    case DEADLINE: {
-                        String[] content = scanner.nextLine().trim().split(" /by ");
-                        Deadline deadline = getDeadLine(content);
-                        bun.taskList.add(deadline);
-                        printAddTaskMessage(deadline, bun.taskList.size());
-                        break;
-                    }
-                    case EVENT: {
-                        String[] content = scanner.nextLine().trim().split(" /from | /to ");
-                        //TODO: ensure that /from comes before /to
-                        Event event = getEvent(content);
-                        bun.taskList.add(event);
-                        printAddTaskMessage(event, bun.taskList.size());
-                        break;
-                    }
+                    ToDo toDo = new ToDo(description);
+                    bun.taskList.add(toDo);
+                    printAddTaskMessage(toDo, bun.taskList.size());
+                    break;
+                }
+                case DEADLINE: {
+                    String[] content = scanner.nextLine().trim().split(" /by ");
+                    Deadline deadline = getDeadLine(content);
+                    bun.taskList.add(deadline);
+                    printAddTaskMessage(deadline, bun.taskList.size());
+                    break;
+                }
+                case EVENT: {
+                    String[] content = scanner.nextLine().trim().split(" /from | /to ");
+                    //TODO: ensure that /from comes before /to
+                    Event event = getEvent(content);
+                    bun.taskList.add(event);
+                    printAddTaskMessage(event, bun.taskList.size());
+                    break;
+                }
                 }
                 FileManager.saveTask(bun.taskList);
             } catch (BunException e) {

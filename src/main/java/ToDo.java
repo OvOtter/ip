@@ -7,4 +7,8 @@ public class ToDo extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    public String getStoredString(){
+        return String.format("T | %s", super.getStoredString());
+    }
 }

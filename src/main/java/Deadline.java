@@ -10,4 +10,8 @@ public class Deadline extends Task{
     public String toString() {
       return String.format("[D]%s (by: %s)", super.toString(), date);
     }
+
+    public String getStoredString(){
+        return String.format("D | %s | %s", super.getStoredString(), this.date);
+    }
 }
