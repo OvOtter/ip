@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void dummyTest(){
-        assertEquals(2, 2);
-    }
-
-    @Test
-    public void anotherDummyTest(){
-        assertEquals(4, 4);
+    public void testDescriptionWithMultipleWords() throws DateFormatException, InvalidCommandException, MissingFieldException {
+        assertEquals((new AddCommand(new Event("read books", "2004-03-19", "2004-03-20"))), Parser.parse(new String[]{"Event", "read books /from 2024-03-19 /to 2024-03-20"}));
     }
 }

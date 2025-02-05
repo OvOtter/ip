@@ -26,4 +26,14 @@ public class Event extends Task{
     public String getStoredString(){
         return String.format("E | %s | %s | %s", super.getStoredString(), this.start, this.end);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event e = (Event) obj;
+            return super.equals(obj) || this.start.equals(e.start) || this.end.equals(e.end);
+        } else {
+            return false;
+        }
+    }
 }

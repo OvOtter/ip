@@ -12,4 +12,11 @@ public abstract class Command {
     }
 
     abstract void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Command command) {
+            return isExit == command.isExit;
+        } else return false;
+    }
 }

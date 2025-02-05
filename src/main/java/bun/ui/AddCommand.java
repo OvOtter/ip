@@ -13,4 +13,12 @@ public class AddCommand extends Command {
         taskList.addTask(this.task);
         ui.printAddTaskMessage(this.task, taskList.getSize());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof AddCommand cmd) {
+            return this.task.equals(cmd.task);
+        }
+        return false;
+    }
 }

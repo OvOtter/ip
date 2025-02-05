@@ -62,4 +62,12 @@ public class Task {
         if (isDone) {return "1 | " + description;}
         else {return "0 | " + description;}
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task other) {
+            return this.description.equals(other.description) && this.isDone == other.isDone;
+        } else {return false;}
+
+    }
 }

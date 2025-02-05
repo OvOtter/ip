@@ -32,7 +32,7 @@ public class TaskList {
         Task curTask;
         try {
             curTask = this.taskList.get(index);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(index + 1, this.taskList.size());
         }
         curTask.markAsDone();
