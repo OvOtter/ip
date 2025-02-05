@@ -32,7 +32,7 @@ public class Parser {
         }
         case REMOVE: {
             int index = Integer.parseInt(fullCommand[1]) - 1;
-            return new DeleteCommand(index);
+            return new DeletionCommand(index);
         }
         case TODO: {
             String description = fullCommand[1];

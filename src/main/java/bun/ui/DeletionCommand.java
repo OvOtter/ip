@@ -1,9 +1,9 @@
 package bun.ui;
 
-public class DeleteCommand extends Command {
+public class DeletionCommand extends Command {
     private final int index;
 
-    public DeleteCommand(int index) {
+    public DeletionCommand(int index) {
         super(false);
         this.index = index;
     }
