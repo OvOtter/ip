@@ -11,10 +11,18 @@ import java.util.List;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a new instance of `Storage` with the specified parameters.
+     * @param filePath Filepath to store the task list locally.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Stores the task list into filePath
+     * @param tasks Task List to be stored
+     */
     public void save(TaskList tasks) {
         Path dataDir = Path.of("data");
         String content = tasks.toStoredContent();
@@ -34,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an array list with tasks stored locally at filePath/
+     * @return Array list with existing tasks.
+     * @throws BunException If tasks cannot be loaded properly.
+     */
     public ArrayList<Task> load() throws BunException {
         Path filePath = Path.of(this.filePath);
         ArrayList<Task> returnedTasks = new ArrayList<>();

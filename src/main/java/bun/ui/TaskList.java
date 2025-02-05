@@ -79,6 +79,12 @@ public class TaskList {
         return taskListDisplay.toString();
     }
 
+    /**
+     * Returns the String representation of the taskList to be stored locally.
+     *
+     * @return String representation of the taskList.
+     */
+
     public String toStoredContent() {
         StringBuilder taskListstored = new StringBuilder();
         for (Task task : this.taskList) {
