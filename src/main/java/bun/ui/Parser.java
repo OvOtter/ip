@@ -17,59 +17,59 @@ public class Parser {
             throw new InvalidCommandException(instruction);
         }
         switch (command) {
-            case BYE:
-                return new ExitCommand();
-            case LIST: {
-                return new ListCommand();
+        case BYE:
+            return new ExitCommand();
+        case LIST: {
+            return new ListCommand();
+        }
+        case MARK: {
+            int index = Integer.parseInt(fullCommand[1]) - 1;
+            return new EditCommand(true, index);
+        }
+        case UNMARK: {
+            int index = Integer.parseInt(fullCommand[1]) - 1;
+            return new EditCommand(false, index);
+        }
+        case REMOVE: {
+            int index = Integer.parseInt(fullCommand[1]) - 1;
+            return new DeleteCommand(index);
+        }
+        case TODO: {
+            String description = fullCommand[1];
+            if (description.isEmpty()) {
+                throw new MissingFieldException("description");
             }
-            case MARK: {
-                int index = Integer.parseInt(fullCommand[1]) - 1;
-                return new EditCommand(true, index);
+            return new AddCommand(new ToDo(description));
+        }
+        case DEADLINE: {
+            String[] content = fullCommand[1].split(" /by ");
+            if (content.length == 0 || content[0].trim().isEmpty()) {
+                throw new MissingFieldException("description");
+            } else if (content.length == 1) {
+                throw new MissingFieldException("due date");
             }
-            case UNMARK: {
-                int index = Integer.parseInt(fullCommand[1]) - 1;
-                return new EditCommand(false, index);
+            String description = content[0].trim();
+            String date = content[1].trim();
+            return new AddCommand(new Deadline(description, date));
+        }
+        case EVENT: {
+            String[] content = fullCommand[1].split(" /from | /to ");
+            if (content.length == 0 || content[0].trim().isEmpty()) {
+                throw new MissingFieldException("description");
+            } else if (content.length == 1 || content[1].trim().isEmpty()) {
+                throw new MissingFieldException("start date");
+            } else if (content.length == 2) {
+                throw new MissingFieldException("end date");
             }
-            case REMOVE: {
-                int index = Integer.parseInt(fullCommand[1]) - 1;
-                return new DeleteCommand(index);
-            }
-            case TODO: {
-                String description = fullCommand[1];
-                if (description.isEmpty()) {
-                    throw new MissingFieldException("description");
-                }
-                return new AddCommand(new ToDo(description));
-            }
-            case DEADLINE: {
-                String[] content = fullCommand[1].split(" /by ");
-                if (content.length == 0 || content[0].trim().isEmpty()) {
-                    throw new MissingFieldException("description");
-                } else if (content.length == 1) {
-                    throw new MissingFieldException("due date");
-                }
-                String description = content[0].trim();
-                String date = content[1].trim();
-                return new AddCommand(new Deadline(description, date));
-            }
-            case EVENT: {
-                String[] content = fullCommand[1].split(" /from | /to ");
-                if (content.length == 0 || content[0].trim().isEmpty()) {
-                    throw new MissingFieldException("description");
-                } else if (content.length == 1 || content[1].trim().isEmpty()) {
-                    throw new MissingFieldException("start date");
-                } else if (content.length == 2) {
-                    throw new MissingFieldException("end date");
-                }
-                String description = content[0].trim();
-                String start = content[1].trim();
-                String end = content[2].trim();
+            String description = content[0].trim();
+            String start = content[1].trim();
+            String end = content[2].trim();
 
-                return new AddCommand(new Event(description, start, end));
-            }
-            default: {
-                throw new InvalidCommandException(instruction);
-            }
+            return new AddCommand(new Event(description, start, end));
+        }
+        default: {
+            throw new InvalidCommandException(instruction);
+        }
         }
     }
 }
