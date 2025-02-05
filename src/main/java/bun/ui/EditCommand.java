@@ -10,14 +10,14 @@ public class EditCommand extends Command {
         this.index = index;
     }
 
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
         if (this.isMarkOperation) {
             Task task = taskList.markTask(this.index);
             ui.printMarkTaskMessage(task);
-        }
-        else {
+        } else {
             Task task = taskList.unmarkTask(this.index);
-            ui.printUnmarkTaskMessage(task, taskList.getSize());
+            ui.printUnmarkTaskMessage(task);
         }
         storage.save(taskList);
     }

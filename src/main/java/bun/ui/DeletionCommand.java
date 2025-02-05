@@ -12,5 +12,6 @@ public class DeletionCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
         Task task = taskList.deleteTask(index);
         ui.printDeleteTaskMessage(task, taskList.getSize());
+        storage.save(taskList);
     }
 }

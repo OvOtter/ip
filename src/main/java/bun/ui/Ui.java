@@ -53,13 +53,11 @@ public class Ui {
     }
 
     public void printMarkTaskMessage(Task task) {
-        System.out.println("    OK D: I've marked this task as not done yet:\n      " + task);
+        System.out.println("    OK :D I've marked this task as done:\n      " + task);
     }
 
-    public void printUnmarkTaskMessage(Task task, int taskCount) {
-        System.out.println("     Noted. I've removed this task:\n" +
-                "       " + task + "\n" +
-                "     Now you have " + taskCount + " task(s) in the list.");
+    public void printUnmarkTaskMessage(Task task) {
+        System.out.println("    OK D: I've marked this task as not done yet:\n      " + task);
     }
 
     public void showError(String error) {
@@ -68,9 +66,18 @@ public class Ui {
 
     public void printList(TaskList taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("    No tasks are stored.");
+            System.out.println("    No tasks yet.");
         } else {
             System.out.println("    Here are the tasks in your list:");
+            System.out.print(taskList);
+        }
+    }
+
+    public void printFound(TaskList taskList) {
+        if (taskList.isEmpty()) {
+            System.out.println("    No matching task is found.");
+        } else {
+            System.out.println("    Here are the matching tasks in your list:");
             System.out.print(taskList);
         }
     }

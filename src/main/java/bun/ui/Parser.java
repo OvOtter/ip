@@ -1,10 +1,6 @@
 package bun.ui;
 
 public class Parser {
-    public enum CommandWord {
-        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT
-    }
-
     public static Command parse(String[] fullCommand) throws InvalidCommandException, MissingFieldException, DateFormatException {
         if (fullCommand == null || fullCommand.length == 0) {
             throw new InvalidCommandException("");
@@ -67,9 +63,19 @@ public class Parser {
 
             return new AddCommand(new Event(description, start, end));
         }
+        case FIND: {
+            if (fullCommand.length < 2 || fullCommand[1].trim().isEmpty()) {
+                throw new MissingFieldException("keyword");
+            }
+            return new FindCommand(fullCommand[1].trim());
+        }
         default: {
             throw new InvalidCommandException(instruction);
         }
         }
+    }
+
+    public enum CommandWord {
+        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT, FIND
     }
 }

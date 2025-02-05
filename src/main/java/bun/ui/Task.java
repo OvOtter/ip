@@ -29,7 +29,7 @@ public class Task {
                     taskToReturn.markAsDone();
                 }
             } else {
-                assert(storedTask.charAt(0) == 'E');
+                assert (storedTask.charAt(0) == 'E');
                 taskToReturn = new Event(content[2], content[3], content[4]);
                 if (content[1].equals("1")) {
                     taskToReturn.markAsDone();
@@ -53,21 +53,36 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns whether the task description contains the keyword in the parameter.
+     *
+     * @param keyword Keyword to search.
+     * @return Whether the keyword is part of the description.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);
     }
 
     public String getStoredString() {
-        if (isDone) {return "1 | " + description;}
-        else {return "0 | " + description;}
+        if (isDone) {
+            return "1 | " + description;
+        } else {
+            return "0 | " + description;
+        }
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Task other) {
             return this.description.equals(other.description) && this.isDone == other.isDone;
-        } else {return false;}
+        } else {
+            return false;
+        }
 
     }
 }
