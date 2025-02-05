@@ -1,10 +1,6 @@
 package bun.ui;
 
 public class Parser {
-    public enum CommandWord {
-        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT, FIND
-    }
-
     /**
      * Returns the Command interpreted from the input instruction word and details (if any)
      *
@@ -13,8 +9,8 @@ public class Parser {
      *                    and the second element is the detail of the instruction (if any).
      * @return Command requested in the input.
      * @throws InvalidCommandException If the command word is missing or not one of the listed CommandWord.
-     * @throws MissingFieldException If any field for details is missing.
-     * @throws DateFormatException If the input date is not in YYYY-MM-DD format.
+     * @throws MissingFieldException   If any field for details is missing.
+     * @throws DateFormatException     If the input date is not in YYYY-MM-DD format.
      */
     public static Command parse(String[] fullCommand) throws InvalidCommandException, MissingFieldException, DateFormatException {
         if (fullCommand == null || fullCommand.length == 0) {
@@ -88,5 +84,9 @@ public class Parser {
             throw new InvalidCommandException(instruction);
         }
         }
+    }
+
+    public enum CommandWord {
+        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT, FIND
     }
 }

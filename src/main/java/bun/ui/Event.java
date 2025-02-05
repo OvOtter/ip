@@ -3,7 +3,7 @@ package bun.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
 
@@ -18,19 +18,18 @@ public class Event extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), start, end);
     }
 
     @Override
-    public String getStoredString(){
+    public String getStoredString() {
         return String.format("E | %s | %s | %s", super.getStoredString(), this.start, this.end);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Event) {
-            Event e = (Event) obj;
+        if (obj instanceof Event e) {
             return super.equals(obj) || this.start.equals(e.start) || this.end.equals(e.end);
         } else {
             return false;
