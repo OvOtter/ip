@@ -3,7 +3,7 @@ package bun.ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate date;
 
     public Deadline(String description, String date) throws DateFormatException {
@@ -17,10 +17,10 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-      return String.format("[D]%s (by: %s)", super.toString(), this.date);
+        return String.format("[D]%s (by: %s)", super.toString(), this.date);
     }
 
-    public String getStoredString(){
+    public String getStoredString() {
         return String.format("D | %s | %s", super.getStoredString(), this.date);
     }
 }

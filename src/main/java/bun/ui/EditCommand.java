@@ -27,8 +27,7 @@ public class EditCommand extends Command {
         if (this.isMarkOperation) {
             Task task = taskList.markTask(this.index);
             ui.printMarkTaskMessage(task);
-        }
-        else {
+        } else {
             Task task = taskList.unmarkTask(this.index);
             ui.printUnmarkTaskMessage(task, taskList.getSize());
         }

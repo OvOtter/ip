@@ -1,10 +1,6 @@
 package bun.ui;
 
 public class Parser {
-    public enum CommandWord {
-        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT
-    }
-
     /**
      * Returns the Command interpreted from the input instruction word and details (if any)
      *
@@ -82,5 +78,9 @@ public class Parser {
             throw new InvalidCommandException(instruction);
         }
         }
+    }
+
+    public enum CommandWord {
+        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT
     }
 }

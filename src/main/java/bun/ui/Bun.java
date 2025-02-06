@@ -21,6 +21,10 @@ public class Bun {
         this.taskList = taskList1;
     }
 
+    public static void main(String[] args) {
+        new Bun("data/tasks.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -35,9 +39,5 @@ public class Bun {
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Bun("data/tasks.txt").run();
     }
 }
