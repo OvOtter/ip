@@ -1,6 +1,6 @@
 package bun.ui;
 
-public class Parser {
+public class Parser {git cg
     /**
      * Returns the Command interpreted from the input instruction word and details (if any)
      *
