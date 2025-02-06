@@ -6,7 +6,7 @@ public class DeletionCommand extends Command {
     /**
      * Constructs a new instance of `DeletionCommand` with the specified parameters.
      *
-     * @param task Task to be deleted.
+     * @param index Index of the task to be deleted.
      */
     public DeletionCommand(int index) {
         super(false);
