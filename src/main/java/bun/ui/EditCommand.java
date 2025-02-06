@@ -7,7 +7,8 @@ public class EditCommand extends Command {
     /**
      * Constructs a new instance of `EditCommand` with the specified parameters.
      *
-     * @param task Task to be marked/unmarked.
+     * @param isMarkOperation Whether the command is mark or unmark/
+     * @param index           Index of task to mark/unmark.
      */
     public EditCommand(boolean isMarkOperation, int index) {
         super(false);
@@ -19,17 +20,18 @@ public class EditCommand extends Command {
      * Execute the command by marking or unmarking the task in the taskList.
      *
      * @param taskList TaskList to be updated by the command.
-     * @param ui Ui to be updated by the command.
-     * @param storage Storage to be updated by the command.
+     * @param ui       Ui to be updated by the command.
+     * @param storage  Storage to be updated by the command.
      * @throws InvalidIndexException If index is out of bound.
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
         if (this.isMarkOperation) {
             Task task = taskList.markTask(this.index);
             ui.printMarkTaskMessage(task);
         } else {
             Task task = taskList.unmarkTask(this.index);
-            ui.printUnmarkTaskMessage(task, taskList.getSize());
+            ui.printUnmarkTaskMessage(task);
         }
         storage.save(taskList);
     }

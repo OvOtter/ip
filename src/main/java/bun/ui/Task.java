@@ -53,6 +53,16 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns whether the task description contains the keyword in the parameter.
+     *
+     * @param keyword Keyword to search.
+     * @return Whether the keyword is part of the description.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

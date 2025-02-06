@@ -50,6 +50,16 @@ public class TaskList {
         return curTask;
     }
 
+    public TaskList filterByWord(String word) {
+        ArrayList<Task> filteredTaskList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.containsKeyword(word)) {
+                filteredTaskList.add(task);
+            }
+        }
+        return new TaskList(filteredTaskList);
+    }
+
     public int getSize() {
         return this.taskList.size();
     }
@@ -60,13 +70,13 @@ public class TaskList {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder taskListDisplay = new StringBuilder();
+        int index = 1;
         for (Task task : this.taskList) {
-            sb.append("      ");
-            sb.append(task.toString());
-            sb.append("\n");
+            taskListDisplay.append("      ").append(index).append(". ").append(task.toString()).append("\n");
+            index++;
         }
-        return sb.toString();
+        return taskListDisplay.toString();
     }
 
     /**
@@ -76,11 +86,11 @@ public class TaskList {
      */
 
     public String toStoredContent() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder taskListstored = new StringBuilder();
         for (Task task : this.taskList) {
-            sb.append(task.getStoredString());
-            sb.append("\n");
+            taskListstored.append(task.getStoredString());
+            taskListstored.append("\n");
         }
-        return sb.toString();
+        return taskListstored.toString();
     }
 }

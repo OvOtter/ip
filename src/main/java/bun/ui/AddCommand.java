@@ -24,6 +24,7 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(this.task);
         ui.printAddTaskMessage(this.task, taskList.getSize());
+        storage.save(taskList);
     }
 
     @Override

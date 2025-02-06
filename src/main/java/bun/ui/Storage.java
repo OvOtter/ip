@@ -38,7 +38,7 @@ public class Storage {
             );
 
         } catch (IOException e) {
-            System.err.println("Failed to write to duke.txt: " + e.getMessage());
+            System.err.println("Failed to write to tasks.txt: " + e.getMessage());
         }
     }
 
