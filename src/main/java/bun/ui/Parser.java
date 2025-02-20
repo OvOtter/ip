@@ -31,14 +31,17 @@ public class Parser {
         }
         case MARK: {
             int index = Integer.parseInt(fullCommand[1]) - 1;
+            assert index >= 0 : "Index must not be negative";
             return new EditCommand(true, index);
         }
         case UNMARK: {
             int index = Integer.parseInt(fullCommand[1]) - 1;
+            assert index >= 0 : "Index must not be negative";
             return new EditCommand(false, index);
         }
         case REMOVE: {
             int index = Integer.parseInt(fullCommand[1]) - 1;
+            assert index >= 0 : "Index must not be negative";
             return new DeletionCommand(index);
         }
         case TODO: {
