@@ -80,6 +80,17 @@ public class Parser {
             }
             return new FindCommand(fullCommand[1].trim());
         }
+        case DOAFTER: {
+            String[] content = fullCommand[1].split(" /after ");
+            if (content.length == 0 || content[0].trim().isEmpty()) {
+                throw new MissingFieldException("description");
+            } else if (content.length == 1) {
+                throw new MissingFieldException("start date");
+            }
+            String description = content[0].trim();
+            String date = content[1].trim();
+            return new AddCommand(new DoAfter(description, date));
+        }
         default: {
             throw new InvalidCommandException(instruction);
         }
@@ -87,6 +98,6 @@ public class Parser {
     }
 
     public enum CommandWord {
-        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT, FIND
+        BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT, FIND, DOAFTER
     }
 }
