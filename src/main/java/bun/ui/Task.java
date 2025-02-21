@@ -10,6 +10,9 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Converts a task in its stored (String) form to a Task instance
+     */
     public static Task stringToTask(String storedTask) {
         if (storedTask == null || storedTask.isEmpty()) {
             return null;

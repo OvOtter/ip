@@ -1,5 +1,9 @@
 package bun.ui;
 
+/**
+ * AddCommand is the main entity we'll be using to handle commands to add different types of tasks.
+ * @author OVOtter
+ */
 public class AddCommand extends Command {
     private final Task task;
 

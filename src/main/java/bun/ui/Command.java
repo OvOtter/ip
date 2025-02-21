@@ -1,5 +1,9 @@
 package bun.ui;
 
+/**
+ * Command is an abstract class for all commands.
+ * @author OVOtter
+ */
 public abstract class Command {
     private final boolean isExit;
 
@@ -17,6 +21,8 @@ public abstract class Command {
     public boolean equals(Object obj) {
         if (obj instanceof Command command) {
             return isExit == command.isExit;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 }

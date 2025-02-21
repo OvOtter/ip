@@ -12,7 +12,8 @@ public class Parser {
      * @throws MissingFieldException   If any field for details is missing.
      * @throws DateFormatException     If the input date is not in YYYY-MM-DD format.
      */
-    public static Command parse(String[] fullCommand) throws InvalidCommandException, MissingFieldException, DateFormatException {
+    public static Command parse(String[] fullCommand) throws InvalidCommandException,
+            MissingFieldException, DateFormatException {
         if (fullCommand == null || fullCommand.length == 0) {
             throw new InvalidCommandException("");
         }
@@ -63,25 +64,27 @@ public class Parser {
             return new AddCommand(new Deadline(description, date));
         }
         case EVENT: {
-            String[] description_dates = fullCommand[1].split("/from ");
+            String[] descriptionDates = fullCommand[1].split("/from ");
 
-            if (description_dates.length == 0 || description_dates[0].trim().isEmpty()) {
-                throw new MissingFieldException("description (after the \"event\" command amd before specifying start and end dates");
-            } else if (description_dates.length == 1 || description_dates[1].trim().isEmpty()) {
-                throw new MissingFieldException("start and end dates after the \"/from\" and \"/to\" keywords respectively");
+            if (descriptionDates.length == 0 || descriptionDates[0].trim().isEmpty()) {
+                throw new MissingFieldException("description (after the \"event\" command "
+                        + "and before specifying start and end dates");
+            } else if (descriptionDates.length == 1 || descriptionDates[1].trim().isEmpty()) {
+                throw new MissingFieldException("start and end dates "
+                        + "after the \"/from\" and \"/to\" keywords respectively");
             }
 
-            String[] start_end = description_dates[1].split("/to ");
+            String[] startEnd = descriptionDates[1].split("/to ");
 
-            if (start_end.length == 0 || start_end[0].trim().isEmpty()) {
+            if (startEnd.length == 0 || startEnd[0].trim().isEmpty()) {
                 throw new MissingFieldException("start date after the \"/from\" keyword");
-            } else if (start_end.length == 1 || start_end[1].trim().isEmpty()) {
+            } else if (startEnd.length == 1 || startEnd[1].trim().isEmpty()) {
                 throw new MissingFieldException("end date after the \"/to\" keyword");
             }
 
-            String description = description_dates[0].trim();
-            String start = start_end[0].trim();
-            String end = start_end[1].trim();
+            String description = descriptionDates[0].trim();
+            String start = startEnd[0].trim();
+            String end = startEnd[1].trim();
 
             return new AddCommand(new Event(description, start, end));
         }
@@ -108,7 +111,10 @@ public class Parser {
         }
     }
 
-    public enum CommandWord {
+    /**
+     * Commands that are valid.
+     */
+    private enum CommandWord {
         BYE, LIST, MARK, UNMARK, REMOVE, TODO, DEADLINE, EVENT, FIND, DOAFTER
     }
 }

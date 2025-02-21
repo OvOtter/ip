@@ -1,5 +1,9 @@
 package bun.ui;
 
+/**
+ * DeleteCommand is the main entity we'll be using to handle commands to delete a task.
+ * @author OVOtter
+ */
 public class DeletionCommand extends Command {
     private final int index;
 

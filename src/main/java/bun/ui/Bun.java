@@ -2,12 +2,20 @@ package bun.ui;
 
 import java.util.Scanner;
 
+/**
+ * Bun is the main entity we'll be using to launch the functionalities of Bun.
+ * @author OVOtter
+ */
 public class Bun {
 
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructs a new Bun instance with an initial task list stored locally.
+     * @param filePath File destination of the initial task list.
+     */
     public Bun(String filePath) {
         TaskList taskList1;
         this.ui = new Ui();
@@ -25,6 +33,9 @@ public class Bun {
         new Bun("data/tasks.txt").run();
     }
 
+    /**
+     * Runs the Bun application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
