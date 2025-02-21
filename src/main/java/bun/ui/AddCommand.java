@@ -21,14 +21,15 @@ public class AddCommand extends Command {
      * Execute the command by adding its task to the taskList.
      *
      * @param taskList TaskList to be updated by the command.
-     * @param ui Ui to be updated by the command.
-     * @param storage Storage to be updated by the command (not used).
+     * @param ui       Ui to be updated by the command.
+     * @param storage  Storage to be updated by the command (not used).
+     * @return The response to be printed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(this.task);
-        ui.printAddTaskMessage(this.task, taskList.getSize());
         storage.save(taskList);
+        return ui.getAddTaskMessage(this.task, taskList.getSize());
     }
 
     @Override

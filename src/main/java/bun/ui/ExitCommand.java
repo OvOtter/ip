@@ -15,9 +15,15 @@ public class ExitCommand extends Command {
      * @param taskList TaskList to be updated by the command (not used).
      * @param ui       Ui to be updated by the command.
      * @param storage  Storage to be updated by the command (not used).
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showEndOfConversation();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.getEndOfConversation();
+    }
+
+    @Override
+    public boolean isExit() {
+        return true;
     }
 }

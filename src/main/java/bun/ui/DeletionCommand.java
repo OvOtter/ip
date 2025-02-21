@@ -26,9 +26,9 @@ public class DeletionCommand extends Command {
      * @throws InvalidIndexException If index of command is out of bound.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
         Task task = taskList.deleteTask(index);
-        ui.printDeleteTaskMessage(task, taskList.getSize());
         storage.save(taskList);
+        return ui.getDeleteTaskMessage(task, taskList.getSize());
     }
 }

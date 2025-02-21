@@ -15,7 +15,7 @@ public abstract class Command {
         return isExit;
     }
 
-    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException;
+    abstract String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException;
 
     @Override
     public boolean equals(Object obj) {

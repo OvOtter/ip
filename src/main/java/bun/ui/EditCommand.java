@@ -22,17 +22,19 @@ public class EditCommand extends Command {
      * @param taskList TaskList to be updated by the command.
      * @param ui       Ui to be updated by the command.
      * @param storage  Storage to be updated by the command.
+     * @return Response to be printed.
      * @throws InvalidIndexException If index is out of bound.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidIndexException {
         if (this.isMarkOperation) {
             Task task = taskList.markTask(this.index);
-            ui.printMarkTaskMessage(task);
+            storage.save(taskList);
+            return ui.getMarkTaskMessage(task);
         } else {
             Task task = taskList.unmarkTask(this.index);
-            ui.printUnmarkTaskMessage(task);
+            storage.save(taskList);
+            return ui.getUnmarkTaskMessage(task);
         }
-        storage.save(taskList);
     }
 }

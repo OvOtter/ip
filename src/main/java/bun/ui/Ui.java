@@ -17,26 +17,35 @@ public class Ui {
             """;
 
     /**
-     * Prints the opening message.
+     * Returns the opening message.
      */
-    public void showWelcome() {
-        System.out.println("    Hello from\n" + logo);
-        System.out.println("    Hello! I'm " + name + ".\n"
-                + "    What can I do for you?");
+    public String showWelcome() {
+        return "    Hello from\n" + logo
+                + "    Hello! I'm " + name + ".\n"
+                + "    What can I do for you?";
     }
 
     /**
-     * Prints the farewell message when the conversation is ended by the user.
+     * Returns the farewell message when the conversation is ended by the user.
      */
-    public void showEndOfConversation() {
-        System.out.println("    Bye. Hope to see you again soon!");
+    public String getEndOfConversation() {
+        return "    Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the error message if the bot fails to load.
+     * Returns the error message if the bot fails to load.
      */
-    public void showLoadingError() {
-        System.out.println("    Sorry, bun couldn't be loaded.");
+    public String getLoadingError() {
+        return "    Sorry, bun couldn't be loaded.";
+    }
+
+    public String[] readCommand(String line) {
+        String[] parts = line.split("\\s+", 2);
+        if (parts.length == 1) {
+            return new String[]{parts[0]}; // No arguments
+        } else {
+            return new String[]{parts[0], parts[1]}; // Command + Arguments
+        }
     }
 
     /**
@@ -47,74 +56,68 @@ public class Ui {
      */
     public String[] readCommand(Scanner scanner) {
         String line = scanner.nextLine().trim(); // Read full line
-        String[] parts = line.split("\\s+", 2);
-        if (parts.length == 1) {
-            return new String[]{parts[0]}; // No arguments
-        } else {
-            return new String[]{parts[0], parts[1]}; // Command + Arguments
-        }
+        return readCommand(line);
     }
 
     /**
-     * Prints the notification message after a task is successfully added.
+     * Returns the notification message after a task is successfully added.
      *
      * @param task Task added.
      */
-    public void printAddTaskMessage(Task task, int taskCount) {
-        System.out.println("    Got it. I've added this task:\n"
+    public String getAddTaskMessage(Task task, int taskCount) {
+        return "    Got it. I've added this task:\n"
                 + "      " + task + "\n"
-                + "    Now you have " + taskCount + " task(s) in the list.");
+                + "    Now you have " + taskCount + " task(s) in the list.";
     }
 
     /**
-     * Prints the notification message after a task is successfully removed.
+     * Returns the notification message after a task is successfully removed.
      *
      * @param task Task removed.
      */
-    public void printDeleteTaskMessage(Task task, int taskCount) {
-        System.out.println("     Noted. I've removed this task:\n"
+    public String getDeleteTaskMessage(Task task, int taskCount) {
+        return "     Noted. I've removed this task:\n"
                 + "       " + task + "\n"
-                + "     Now you have " + taskCount + " task(s) in the list.");
+                + "     Now you have " + taskCount + " task(s) in the list.";
     }
 
     /**
-     * Prints the notification message after a task is successfully marked as done.
+     * Returns the notification message after a task is successfully marked as done.
      *
      * @param task Task marked.
      */
-    public void printMarkTaskMessage(Task task) {
-        System.out.println("    OK :D I've marked this task as done:\n      " + task);
+    public String getMarkTaskMessage(Task task) {
+        return "    OK :D I've marked this task as done:\n      " + task;
     }
 
     /**
-     * Prints the notification message after a task is successfully unmarked as not done.
+     * Returns the notification message after a task is successfully unmarked as not done.
      *
      * @param task Task unmarked.
      */
-    public void printUnmarkTaskMessage(Task task) {
-        System.out.println("    OK D: I've marked this task as not done yet:\n      " + task);
+    public String getUnmarkTaskMessage(Task task) {
+        return "    OK D: I've marked this task as not done yet:\n      " + task;
     }
 
     /**
-     * Prints the notification message after a task is successfully added.
+     * Returns the notification message after a task is successfully added.
      *
      * @param error Error message.
      */
-    public void showError(String error) {
-        System.out.println("    Bun is facing some error: \n" + error);
+    public String getError(String error) {
+        return "    Bun is facing some error: \n" + error;
     }
 
     /**
-     * Prints current list of tasks.
+     * Returns current list of tasks.
      *
      * @param taskList taskList List of active tasks.
      */
-    public void printList(TaskList taskList) {
+    public String getListForPrint(TaskList taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("    No tasks yet.");
+            return "    No tasks yet.";
         } else {
-            System.out.println("    Here are the tasks in your list:");
-            System.out.print(taskList);
+            return "    Here are the tasks in your list:\n" + taskList;
         }
     }
 
@@ -123,12 +126,11 @@ public class Ui {
      *
      * @param taskList List of tasks found.
      */
-    public void printFound(TaskList taskList) {
+    public String getFoundForPrint(TaskList taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("    No matching task is found.");
+            return "    No matching task is found.";
         } else {
-            System.out.println("    Here are the matching tasks in your list:");
-            System.out.print(taskList);
+            return "    Here are the matching tasks in your list:\n" + taskList;
         }
     }
 }
