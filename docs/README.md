@@ -2,7 +2,7 @@
 
 Welcome to Bun! Your personal task manager.
 
-![UI](UI.png)
+![UI](Ui.png)
 
 ## Getting Started
 
