@@ -1,4 +1,4 @@
-package bun.command;
+package bun.ui;
 
 public class ListCommand extends Command {
     /**

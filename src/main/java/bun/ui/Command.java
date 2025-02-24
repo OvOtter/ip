@@ -1,4 +1,4 @@
-package bun.command;
+package bun.ui;
 
 /**
  * Command is an abstract class for all commands.

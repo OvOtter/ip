@@ -1,4 +1,4 @@
-package bun.command;
+package bun.ui;
 
 /**
  * AddCommand is the main entity we'll be using to handle commands to add different types of tasks.

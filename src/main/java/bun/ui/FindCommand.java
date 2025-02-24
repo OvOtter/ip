@@ -1,4 +1,4 @@
-package bun.command;
+package bun.ui;
 
 public class FindCommand extends Command {
     private final String keyword;
