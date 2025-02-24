@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.task;
 
 public class Task {
 

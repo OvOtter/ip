@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.exception;
 
 public class InvalidCommandException extends BunException {
     protected String invalidCommand;

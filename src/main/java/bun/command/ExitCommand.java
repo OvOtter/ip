@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.command;
 
 public class ExitCommand extends Command {
 

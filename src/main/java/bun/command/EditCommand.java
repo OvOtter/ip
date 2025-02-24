@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.command;
 
 public class EditCommand extends Command {
     private final boolean isMarkOperation;

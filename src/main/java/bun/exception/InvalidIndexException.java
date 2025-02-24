@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.exception;
 
 public class InvalidIndexException extends BunException {
     public InvalidIndexException(int index, int length) {

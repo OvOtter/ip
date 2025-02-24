@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.exception;
 
 /**
  * DateFormatException represents errors related to wrong time data format.

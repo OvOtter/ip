@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.command;
 
 /**
  * DeleteCommand is the main entity we'll be using to handle commands to delete a task.

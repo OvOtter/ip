@@ -1,4 +1,4 @@
-package bun.ui;
+package bun.exception;
 
 /**
  * BunException is the main entity we'll be using to handle all exceptions specific to Bun.
